@@ -11,10 +11,9 @@ pipeline {
         stage('Checking and Installing Hadolint'){
             steps{
                 sh '''
-                    if ! [ -x "$(command -v hadolint)" ]; then
-                        echo 'Installing hadolint' >&2
-                        make install
-                    fi
+                    sudo wget -O /bin/hadolint https://github.com/hadolint/hadolint/releases/download/v1.16.3/hadolint-Linux-x86_64 && sudo chmod +x /bin/hadolint
+	                pip install --upgrade pip &&\
+		            pip install -r requirements.txt
                 '''
             }
         }
