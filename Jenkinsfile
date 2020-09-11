@@ -10,11 +10,7 @@ pipeline {
         
         stage('Checking and Installing Hadolint'){
             steps{
-                sh '''
-                    sudo wget -O /bin/hadolint https://github.com/hadolint/hadolint/releases/download/v1.16.3/hadolint-Linux-x86_64 && sudo chmod +x /bin/hadolint
-	                pip3 install --upgrade pip &&\
-		            pip3 install -r requirements.txt
-                '''
+                sh "make install"
             }
         }
         
