@@ -25,13 +25,13 @@ pipeline {
             }
         }
         
-        stage('---- Building Docker Image ----') {
+        stage('Building Docker Image ') {
             steps {
                 sh 'sudo bash run_docker.sh'
             }
         }
         
-        stage('---- Pushing Docker Image ----') {
+        stage('Pushing Docker Image') {
             steps {
                 withDockerRegistry([url: "", credentialsId: "docker-id"]) {
                     sh 'bash upload_docker.sh'
@@ -39,16 +39,13 @@ pipeline {
             }
         }
   
-         stage('Deploying app to AWS EKS') {
+         stage('Deploying') {
               steps{
                   echo 'Deploying to AWS EKS ....'
                   withAWS(credentials: 'aws-id', region: 'ap-south-1') {
                       sh "aws eks --region ap-south-1 update-kubeconfig --name capstone"
                       sh "kubectl config use-context arn:aws:eks:ap-south-1:936344068960:cluster/capstone"
                       sh "kubectl apply -f ./clusters/deploy.yaml"
-                      sh "kubectl get nodes"
-                      sh "kubectl get deployments"
-                      sh "kubectl get pod -o wide"
                       
                 }
             }
