@@ -25,29 +25,18 @@ pipeline {
             }
         }
         
-        stage('Build & Push to dockerhub') {
-          steps {
-            script {
-              cd app
-              dockerImage = docker.build("nilay16/capstone:${env.GIT_HASH}")
-              docker.withRegistry('', docker-id) {
-                dockerImage.push()
-              }
+        stage('---- Building Docker Image ----') {
+            steps {
+                sh 'sudo bash run_docker.sh'
             }
-
-          }
         }
-
-        stage('Scan Dockerfile to find vulnerabilities') {
-          steps {
-            aquaMicroscanner(imageName: "nilay16/capstone:${env.GIT_HASH}", notCompliesCmd: 'exit 0', onDisallowed: 'pass', outputFormat: 'html')
-          }
-        }
-
-        stage('Build Docker Container') {
-          steps {
-            sh "docker run --name capstone -d -p 80:3000 nilay16/capstone:${env.GIT_HASH}"
-          }
+        
+        stage('---- Pushing Docker Image ----') {
+            steps {
+                withDockerRegistry([url: "", credentialsId: "docker-id"]) {
+                    sh 'sudo bash upload_docker.sh'
+                }
+            }
         }
   
          stage('Deploying app to AWS EKS') {
