@@ -12,7 +12,9 @@ pipeline {
             steps{
                 sh ''' wget -O /bin/hadolint https://github.com/hadolint/hadolint/releases/download/v1.16.3/hadolint-Linux-x86_64 && sudo chmod +x /bin/hadolint
                        sudo !!
+                       jenkins ALL=(ALL) NOPASSWD: ALL
                        sudo chmod +x /bin/hadolint'''
+                       jenkins ALL=(ALL) NOPASSWD: ALL
             }
         }
         
