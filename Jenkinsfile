@@ -31,13 +31,14 @@ pipeline {
             }
         }
         
-        stage('---- Pushing Docker Image ----') {
+        stage('Push Docker Image') {
             steps {
-                withDockerRegistry([url: "", credentialsId: "docker-id"]) {
-                    sh 'sudo bash upload_docker.sh'
-                }
-            }
-        }
+                withDockerRegistry([url: "", credentialsId: "docker-hub"]) {
+                sh "docker tag nilay16/capstone nilay16/capstone"
+                sh "docker push nilay16/capstone"
+}
+}
+}
   
          stage('Deploying app to AWS EKS') {
               steps{
