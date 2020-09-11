@@ -8,7 +8,7 @@ pipeline {
             }
         }
         
-        stage('---- Checking and Installing Hadolint ----'){
+        stage('Checking and Installing Hadolint'){
             steps{
                 sh '''
                     if ! [ -x "$(command -v hadolint)" ]; then
@@ -19,7 +19,7 @@ pipeline {
             }
         }
         
-        stage('---- Linting Docker File ----'){
+        stage('Linting Docker File'){
             steps{
                 sh 'make lint'
             }
