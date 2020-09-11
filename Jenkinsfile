@@ -45,7 +45,7 @@ pipeline {
                   withAWS(credentials: 'aws-id', region: 'ap-south-1') {
                       sh "aws eks --region ap-south-1 update-kubeconfig --name capstone"
                       sh "kubectl config use-context arn:aws:eks:ap-south-1:936344068960:cluster/capstone"
-                      sh "kubectl apply -f ./clusters/deploy.yaml"
+                      sh "kubectl apply -f clusters/deploy.yaml"
                       sh "kubectl get nodes"
                       sh "kubectl get deployments"
                       sh "kubectl get pod -o wide"
