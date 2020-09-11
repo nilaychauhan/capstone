@@ -27,7 +27,7 @@ pipeline {
         
         stage('Building Docker Image') {
             steps {
-                sh 'bash run_docker.sh'
+                sh 'sudo bash run_docker.sh'
             }
         }
         
