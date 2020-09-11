@@ -8,15 +8,9 @@ pipeline {
             }
         }
         
-        stage('Checking and Installing Hadolint'){
-            steps{
-                sh "make install"
-            }
-        }
-        
-        stage('Linting Docker File'){
-            steps{
-                sh 'make lint'
+        stage ('Lint HTML') {
+            steps {
+                sh 'tidy -q -e *.html'
             }
         }
         
