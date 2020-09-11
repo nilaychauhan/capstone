@@ -31,17 +31,18 @@ pipeline {
             }
         }
         
-        stage('---- Pushing Docker Image ----') {
+        stage('Push image') {
             steps {
-
                 withCredentials([usernamePassword( credentialsId: 'docker-id', usernameVariable: 'USER', passwordVariable: 'PASSWORD')]) {
                 def registry_url = "registry.hub.docker.com/"
                 bat "docker login -u $USER -p $PASSWORD ${registry_url}"
                 docker.withRegistry("http://${registry_url}", "docker-id") {
-                    sh 'bash upload_docker.sh'
-                }
-            }
+                // Push your image now
+                sh "sudo bash upload_docker.sh"
         }
+    }
+}
+}
   
          stage('Deploying app to AWS EKS') {
               steps{
