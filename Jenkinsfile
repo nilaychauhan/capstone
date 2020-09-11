@@ -34,8 +34,7 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 withDockerRegistry([url: "", credentialsId: "docker-id"]) {
-                sh '''docker tag nilay16/capstone nilay16/capstone:v1
-                      docker push nilay16/capstone:v1'''
+                sh 'sudo bash upload_docker.sh'
             }
        }
    }
