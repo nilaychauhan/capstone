@@ -33,8 +33,6 @@ pipeline {
         
         stage('Push Docker Image') {
             steps {
-                sh "cd app"
-                sh "docker image ls"
                 withDockerRegistry([url: "", credentialsId: "docker-id"]) {
                 sh '''docker tag nilay16/capstone nilay16/capstone:v1
                       docker push nilay16/capstone:v1'''
