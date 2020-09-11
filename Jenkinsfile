@@ -27,14 +27,14 @@ pipeline {
         
         stage('Building Docker Image') {
             steps {
-                sh './run_docker.sh'
+                sh 'sudo ./run_docker.sh'
             }
         }
         
         stage('Pushing Docker Image') {
             steps {
                 withDockerRegistry([url: "", credentialsId: "docker-id"]) {
-                    sh 'bash upload_docker.sh'
+                    sh 'sudo ./upload_docker.sh'
                 }
             }
         }
