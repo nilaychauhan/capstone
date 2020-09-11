@@ -14,7 +14,7 @@ lint:
 	hadolint --ignore DL3006 Dockerfile
 
 upload:
-	sh ./scripts/upload_docker.sh
+	sh ./upload_docker.sh
 
 build:
 	docker build --build-arg APP_PORT=5000 --tag=nilay16/capstone .
