@@ -28,6 +28,7 @@ pipeline {
         stage('Build & Push to dockerhub') {
       steps {
         script {
+          cd app
           dockerImage = docker.build("nilay16/capstone:${env.GIT_HASH}")
           docker.withRegistry('', docker-id) {
             dockerImage.push()
